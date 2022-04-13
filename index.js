@@ -45,7 +45,7 @@ function playRound(computerSelection, playerSelection) {
 
 function game() {
   alert(
-    "Open the Console in the Dev Tools to see some information about the game progress. 😉"
+    "Open the Console in the Dev Tools to see some information about the game progress. 😉 -> cmd + opt + C(Mac) or control + shift + C(Windows)"
   );
   let pointsPC = 0;
   let pointsPlayer = 0;
