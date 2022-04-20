@@ -1,24 +1,22 @@
 const ROCK = "Rock";
 const PAPER = "Paper";
 const SCISSORS = "Scissors";
+const weapons = ["Rock", "Paper", "Scissors"];
+const weaponButtons = document.querySelectorAll(".weapon");
+
+/*Eventlistener*/
+weaponButtons.forEach((weapon) => {
+  weapon.addEventListener("click", playerPlay);
+});
 
 function computerPlay() {
-  const randomNumber = Math.floor(Math.random() * 3 + 1);
-  if (randomNumber === 1) {
-    return ROCK;
-  } else if (randomNumber === 2) {
-    return PAPER;
-  } else if (randomNumber === 3) {
-    return SCISSORS;
-  }
+  const randomNumber = Math.floor(Math.random() * 3);
+  return weapons[randomNumber];
 }
 
 function playerPlay() {
-  const weaponOfChoice = prompt("Choose your weapon(Rock, Paper or Scissors):");
-  if (!weaponOfChoice) {
-    return "No weapon. 🥺";
-  }
-  return capitalize(weaponOfChoice);
+  console.log(this.innerText);
+  return this.innerText;
 }
 
 function playRound(computerSelection, playerSelection) {
@@ -43,24 +41,24 @@ function playRound(computerSelection, playerSelection) {
   }
 }
 
-function game() {
-  alert(
-    "Open the Console in the Dev Tools to see some information about the game progress. 😉 -> cmd + opt + C(Mac) or control + shift + C(Windows)"
-  );
-  let pointsPC = 0;
-  let pointsPlayer = 0;
-  for (i = 0; i < 5; i++) {
-    const playerSelection = playerPlay();
-    const computerSelection = computerPlay();
-    let winIndicator = playRound(computerSelection, playerSelection);
-    if (winIndicator === 0) {
-      pointsPC += 1;
-    } else if (winIndicator === 1) {
-      pointsPlayer += 1;
-    }
-  }
-  announceWinner(pointsPC, pointsPlayer);
-}
+// function game() {
+//   alert(
+//     "Open the Console in the Dev Tools to see some information about the game progress. 😉 -> cmd + opt + C(Mac) or control + shift + C(Windows)"
+//   );
+//   let pointsPC = 0;
+//   let pointsPlayer = 0;
+//   for (i = 0; i < 5; i++) {
+//     const playerSelection = playerPlay();
+//     const computerSelection = computerPlay();
+//     let winIndicator = playRound(computerSelection, playerSelection);
+//     if (winIndicator === 0) {
+//       pointsPC += 1;
+//     } else if (winIndicator === 1) {
+//       pointsPlayer += 1;
+//     }
+//   }
+//   announceWinner(pointsPC, pointsPlayer);
+// }
 
 /**
  * A helper function to determine and announce the winner of the Rock, Scissors, Paper game
@@ -90,5 +88,3 @@ function capitalize(word) {
   let wordCapitalized = charCapitalized + word.slice(1).toLowerCase();
   return wordCapitalized;
 }
-
-game();
