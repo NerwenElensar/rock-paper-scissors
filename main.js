@@ -16,7 +16,7 @@ const textWin = document.createTextNode("Congratulations. You won!");
 const textDraw = document.createTextNode("It is a draw!");
 
 /*Eventlistener*/
-const weaponChoice = weaponButtons.forEach((weapon) => {
+weaponButtons.forEach((weapon) => {
   weapon.addEventListener("click", playerPlay);
 });
 
@@ -40,7 +40,7 @@ function playerPlay() {
 
   if (pointsPlayer === 2 || pointsPC === 2) {
     announceWinner(pointsPC, pointsPlayer);
-    clearBoard();
+    disableButtons();
   }
 }
 
@@ -55,20 +55,13 @@ function determineRoundWinner(computerSelection, playerSelection) {
     (computerSelection == SCISSORS && playerSelection == PAPER) ||
     (computerSelection == PAPER && playerSelection == ROCK)
   ) {
-    //console.log(`You lose. PC: ${computerSelection} beats Player: ${playerSelection}.`);
     return 0;
   } else if (
     (playerSelection == ROCK && computerSelection == SCISSORS) ||
     (playerSelection == SCISSORS && computerSelection == PAPER) ||
     (playerSelection == PAPER && computerSelection == ROCK)
-  ) {
-    //console.log(`You win. Player: ${playerSelection} beats PC: ${computerSelection}.`);
+  )
     return 1;
-  } else {
-    console.log(
-      `That's a draw. You choose the same weapon, no weapon or an invalid weapon. Player: ${playerSelection} PC: ${computerSelection}.`
-    );
-  }
 }
 
 /**
@@ -91,22 +84,26 @@ function announceWinner(pointsPC, pointsPlayer) {
   }
 }
 
-function clearBoard() {
+function resetGame() {
   pointsPC = 0;
   pointsPlayer = 0;
-}
-
-/**
- * A helper function to determine, if the game ended in the previous round.
- * The points are reset in the UI and the winners announcement is removed
- */
-function setUpNewRound() {
-  if (pointsPC === 0 && pointsPlayer === 0) {
-    computerPointsUI.innerText = pointsPC;
-    playerPointsUI.innerText = pointsPlayer;
-  }
+  computerPointsUI.innerText = pointsPC;
+  playerPointsUI.innerText = pointsPlayer;
+  enableButtons();
   console.log(scoreBoardUI.lastChild);
   if (scoreBoardUI.lastChild === textWin || scoreBoardUI.lastChild === textLose) {
     scoreBoardUI.removeChild(scoreBoardUI.lastChild);
   }
+}
+
+function disableButtons() {
+  weaponButtons.forEach((weapon) => {
+    weapon.disabled = true;
+  });
+}
+
+function enableButtons() {
+  weaponButtons.forEach((weapon) => {
+    weapon.disabled = false;
+  });
 }
