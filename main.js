@@ -15,10 +15,16 @@ const textLose = document.createTextNode("You lose.");
 const textWin = document.createTextNode("Congratulations. You won!");
 const textDraw = document.createTextNode("It is a draw!");
 
+// Reset button
+const resetButton = document.createElement("button");
+resetButton.innerText = "Reset Game";
+
 /*Eventlistener*/
 weaponButtons.forEach((weapon) => {
   weapon.addEventListener("click", playerPlay);
 });
+
+resetButton.addEventListener("click", resetGame);
 
 // Game logic
 
@@ -27,8 +33,6 @@ let pointsPlayer = 0;
 function playerPlay() {
   const computerSelection = computerPlay();
   let winIndicator = determineRoundWinner(computerSelection, this.innerText);
-
-  setUpNewRound();
 
   if (winIndicator === 0) {
     pointsPC += 1;
@@ -41,6 +45,7 @@ function playerPlay() {
   if (pointsPlayer === 2 || pointsPC === 2) {
     announceWinner(pointsPC, pointsPlayer);
     disableButtons();
+    document.body.appendChild(resetButton);
   }
 }
 
@@ -94,6 +99,7 @@ function resetGame() {
   if (scoreBoardUI.lastChild === textWin || scoreBoardUI.lastChild === textLose) {
     scoreBoardUI.removeChild(scoreBoardUI.lastChild);
   }
+  document.body.removeChild(resetButton);
 }
 
 function disableButtons() {
