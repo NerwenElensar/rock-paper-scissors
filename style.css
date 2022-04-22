@@ -21,11 +21,19 @@ ul {
 .weapon-container {
     display: flex;
     justify-content: center;
-    gap: 5%;
+    gap: 10%;
+}
+
+.btn-weapon {
+    padding: 0;
+    display: block;
+    width: 15%;
+    background-color: white;
+    border: none;
 }
 
 .weapon {
-    width: 10%;
+    width: 100%;
 }
 
 .weapon:hover {

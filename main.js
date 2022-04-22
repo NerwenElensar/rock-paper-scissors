@@ -5,7 +5,7 @@ const SCISSORS = "Scissors";
 const weapons = ["Rock", "Paper", "Scissors"];
 
 // Selectors
-const weaponButtons = document.querySelectorAll(".weapon");
+const weaponButtons = document.querySelectorAll(".btn-weapon");
 const playerPointsUI = document.querySelector(".player-points");
 const computerPointsUI = document.querySelector(".computer-points");
 const scoreBoardUI = document.querySelector(".score-board");
