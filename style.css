@@ -1,0 +1,53 @@
+
+body {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 0;
+    font-family: 'Henny Penny', cursive;
+    font-size: 4rem;
+}
+
+ul {
+    padding: 5% 0;
+    margin: 0;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 15%
+}
+
+.weapon-container {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+
+.weapon {
+    width: 10%;
+}
+
+.weapon:hover {
+    transform: translateY(-0.25em);
+}
+
+.round-announcement {
+    padding: 2%; 
+}
+
+.winner-announcement {
+    padding-bottom: 2%;
+}
+
+.reset-button {
+    background-color: rgba(500, 180, 0, 0.891);
+    padding: 16px 24px;
+    border-radius: 50%;
+}
+
+.reset-button:hover {
+    background-color: rgba(500, 180, 0, 0.891);
+    box-shadow: 0 8px 10px rgb(243, 152, 125);
+    transform: translateY(-0.25em);
+}

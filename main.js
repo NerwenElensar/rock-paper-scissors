@@ -19,11 +19,13 @@ const textDraw = document.createTextNode("It is a draw!");
 
 // Eventlistener
 const weaponOfChoice = weaponButtons.forEach((weapon) => {
+  console.log(weapon);
   weapon.addEventListener("click", playerPlay);
 });
 
 // Reset button
 const resetButton = document.createElement("button");
+resetButton.setAttribute("class", "reset-button");
 resetButton.innerText = "Reset Game";
 
 resetButton.addEventListener("click", resetGame);
@@ -32,8 +34,9 @@ resetButton.addEventListener("click", resetGame);
 let pointsPC = 0;
 let pointsPlayer = 0;
 function playerPlay() {
-  const computerSelection = computerPlay();
-  let winIndicator = determineRoundWinner(computerSelection, this.innerText);
+  const computerChoice = computerPlay();
+  let playerChoice = capitalize(this.classList[1]);
+  let winIndicator = determineRoundWinner(computerChoice, playerChoice);
 
   if (winIndicator === 0) {
     pointsPC += 1;
@@ -135,4 +138,14 @@ function enableButtons() {
   weaponButtons.forEach((weapon) => {
     weapon.disabled = false;
   });
+}
+
+/**
+ * A helper function to capitalize words
+ *
+ * @param {string} word The word to be capitalized
+ * @returns The word capitalized
+ */
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }

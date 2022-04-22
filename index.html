@@ -4,20 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Henny+Penny&family=Modak&family=Mystery+Quest&family=Slackey&display=swap"
+      rel="stylesheet"
+    />
     <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
     <title>Rock, Paper, Scissors</title>
   </head>
   <body>
     <h1>Rock, Paper, Scissors</h1>
-    <button type="button" class="weapon">Rock</button>
-    <button type="button" class="weapon">Paper</button>
-    <button type="button" class="weapon">Scissors</button>
+    <div class="round-announcement"></div>
+
+    <div class="weapon-container">
+      <img src="images/rocks.png" alt="Illustration of rocks" class="weapon rock" />
+      <img src="images/paper.png" alt="Illustration of paper" class="weapon paper" />
+      <img src="images/scissors.png" alt="Illustration of scissors" class="weapon scissors" />
+    </div>
     <div class="score-board">
-      <h2>Scoreboard</h2>
+      <!--<h2>Scoreboard</h2> -->
       <ul>
         <li>Points Player: <span class="player-points">0</span></li>
         <li>Points Computer: <span class="computer-points">0</span></li>
       </ul>
+      <div class="winner-announcement"></div>
     </div>
   </body>
 </html>
