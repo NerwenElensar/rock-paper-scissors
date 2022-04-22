@@ -9,25 +9,26 @@ const weaponButtons = document.querySelectorAll(".weapon");
 const playerPointsUI = document.querySelector(".player-points");
 const computerPointsUI = document.querySelector(".computer-points");
 const scoreBoardUI = document.querySelector(".score-board");
+const winnerAnnounceUI = document.querySelector(".winner-announcement");
+const roundAnnounceUI = document.querySelector(".round-announcement");
 
 //Create some Nodes to insert in the DOM later
 const textLose = document.createTextNode("You lose.");
 const textWin = document.createTextNode("Congratulations. You won!");
 const textDraw = document.createTextNode("It is a draw!");
 
+// Eventlistener
+const weaponOfChoice = weaponButtons.forEach((weapon) => {
+  weapon.addEventListener("click", playerPlay);
+});
+
 // Reset button
 const resetButton = document.createElement("button");
 resetButton.innerText = "Reset Game";
 
-/*Eventlistener*/
-weaponButtons.forEach((weapon) => {
-  weapon.addEventListener("click", playerPlay);
-});
-
 resetButton.addEventListener("click", resetGame);
 
 // Game logic
-
 let pointsPC = 0;
 let pointsPlayer = 0;
 function playerPlay() {
@@ -55,18 +56,33 @@ function computerPlay() {
 }
 
 function determineRoundWinner(computerSelection, playerSelection) {
+  resetRound();
+  const textRoundWin = document.createTextNode(
+    `Player: ${playerSelection} beats PC: ${computerSelection}`
+  );
+  const textRoundLose = document.createTextNode(
+    `PC: ${computerSelection} beats Player: ${playerSelection}`
+  );
+  const textRoundDraw = document.createTextNode(
+    `TIE!!!! ${playerSelection} and ${computerSelection}`
+  );
   if (
     (computerSelection == ROCK && playerSelection == SCISSORS) ||
     (computerSelection == SCISSORS && playerSelection == PAPER) ||
     (computerSelection == PAPER && playerSelection == ROCK)
   ) {
+    roundAnnounceUI.appendChild(textRoundLose);
     return 0;
   } else if (
     (playerSelection == ROCK && computerSelection == SCISSORS) ||
     (playerSelection == SCISSORS && computerSelection == PAPER) ||
     (playerSelection == PAPER && computerSelection == ROCK)
-  )
+  ) {
+    roundAnnounceUI.appendChild(textRoundWin);
     return 1;
+  } else {
+    roundAnnounceUI.appendChild(textRoundDraw);
+  }
 }
 
 /**
@@ -78,14 +94,21 @@ function determineRoundWinner(computerSelection, playerSelection) {
 
 function announceWinner(pointsPC, pointsPlayer) {
   if (pointsPC > pointsPlayer) {
-    scoreBoardUI.appendChild(textLose);
+    winnerAnnounceUI.appendChild(textLose);
     console.log(`Sorry, the PC is better than you. Player: ${pointsPlayer} PC: ${pointsPC}`);
   } else if (pointsPC < pointsPlayer) {
-    scoreBoardUI.appendChild(textWin);
+    winnerAnnounceUI.appendChild(textWin);
     console.log(`You are a real champion. Player: ${pointsPlayer} PC: ${pointsPC}`);
   } else {
-    scoreBoardUI.appendChild(textDraw);
+    winnerAnnounceUI.appendChild(textDraw);
     console.log(`Well that is a draw. Player: ${pointsPlayer} PC: ${pointsPC}`);
+  }
+}
+
+function resetRound() {
+  console.log(roundAnnounceUI.hasChildNodes());
+  if (roundAnnounceUI.hasChildNodes()) {
+    roundAnnounceUI.removeChild(roundAnnounceUI.firstChild);
   }
 }
 
@@ -95,11 +118,11 @@ function resetGame() {
   computerPointsUI.innerText = pointsPC;
   playerPointsUI.innerText = pointsPlayer;
   enableButtons();
-  console.log(scoreBoardUI.lastChild);
-  if (scoreBoardUI.lastChild === textWin || scoreBoardUI.lastChild === textLose) {
-    scoreBoardUI.removeChild(scoreBoardUI.lastChild);
+  if (winnerAnnounceUI.hasChildNodes()) {
+    winnerAnnounceUI.removeChild(winnerAnnounceUI.lastChild);
   }
   document.body.removeChild(resetButton);
+  resetRound();
 }
 
 function disableButtons() {
