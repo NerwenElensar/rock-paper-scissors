@@ -33,3 +33,6 @@ A version with a simple User Interface. The user can choose their weapon with bu
   - Accessing, manipulating and transforming the DOM
   - Using Eventlisteners
 - Transferring the previously implemented logic to a logic with UI
+
+
+_Credits:_ <a href="https://www.flaticon.com/free-icons/" title="icons">Paper, Rocks and Scissors icons created by Freepik - Flaticon</a>
