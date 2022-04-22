@@ -32,11 +32,11 @@ ul {
     border: none;
 }
 
-.weapon {
+.weapon-img {
     width: 100%;
 }
 
-.weapon:hover {
+.weapon-img:hover {
     transform: translateY(-0.25em);
 }
 
