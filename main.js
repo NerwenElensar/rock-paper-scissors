@@ -2,6 +2,7 @@
 const ROCK = "Rock";
 const PAPER = "Paper";
 const SCISSORS = "Scissors";
+const MAX_POINTS = 5;
 const weapons = ["Rock", "Paper", "Scissors"];
 
 // Selectors
@@ -46,7 +47,7 @@ function playerPlay() {
     playerPointsUI.innerText = pointsPlayer;
   }
 
-  if (pointsPlayer === 2 || pointsPC === 2) {
+  if (pointsPlayer === MAX_POINTS || pointsPC === MAX_POINTS) {
     announceWinner(pointsPC, pointsPlayer);
     disableButtons();
     document.body.appendChild(resetButton);
