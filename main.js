@@ -2,7 +2,6 @@ const choices = ["rock", "paper", "scissors"];
 
 let humanScore = 0;
 let computerScore = 0;
-let roundCounter = 0;
 
 const roundAnnouncement = document.querySelector(".round-announcement");
 const scoreboard = document.querySelector(".scoreboard");
@@ -18,15 +17,13 @@ function playRound(e) {
     roundAnnouncement.innerText = `It is a tie. ${capitalize(humanChoice)} vs ${capitalize(
       computerChoice
     )}`;
-  }
-
-  if (
+  } else if (
     (humanChoiceLowerCase === "rock" && computerChoice === "scissors") ||
     (humanChoiceLowerCase === "paper" && computerChoice === "rock") ||
     (humanChoiceLowerCase === "scissors" && computerChoice === "paper")
   ) {
     humanScore++;
-    roundAnnouncement.innerText = `The Human won. ${capitalize(humanChoice)} beats 
+    roundAnnouncement.innerText = `The Human won. ${capitalize(humanChoice)} beats \
     ${capitalize(computerChoice)}.`;
   } else if (
     (computerChoice === "rock" && humanChoiceLowerCase === "scissors") ||
@@ -34,25 +31,35 @@ function playRound(e) {
     (computerChoice === "scissors" && humanChoiceLowerCase === "paper")
   ) {
     computerScore++;
-    roundAnnouncement.innerText = `The Computer won. ${capitalize(
-      computerChoice
-    )} beats ${capitalize(humanChoice)}`;
+    roundAnnouncement.innerText = `The Computer won. ${capitalize(computerChoice)} \
+    beats ${capitalize(humanChoice)}`;
   }
 
-  roundCounter++;
+  scoreboard.innerText = `Human: ${humanScore} Computer: ${computerScore}`;
+
+  if (isGameOver()) {
+    announceWinner();
+    resetScores();
+  }
+}
+
+function isGameOver() {
+  return humanScore === 5 || computerScore === 5;
+}
+
+function announceWinner() {
+  if (humanScore > computerScore) {
+    roundAnnouncement.innerText = "GAME OVER! The Human has won!!!! 🥇";
+  } else {
+    roundAnnouncement.innerText = "GAME OVER! The computer has won! 🤖";
+  }
+
   scoreboard.innerText = `Human: ${humanScore} Computer: ${computerScore}`;
 }
 
-function announceWinner(humanScore, computerScore) {
-  if (humanScore === computerScore) {
-    console.log("You both are Winners!");
-  } else if (humanScore > computerScore) {
-    console.log("The Human has won!!!! 🥇");
-  } else {
-    console.log("The computer has won! 🤖");
-  }
-
-  console.log(`Human: ${humanScore}, Computer: ${computerScore}`);
+function resetScores() {
+  humanScore = 0;
+  computerScore = 0;
 }
 
 function capitalize(word) {
