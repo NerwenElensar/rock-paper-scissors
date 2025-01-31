@@ -2,8 +2,11 @@ const choices = ["rock", "paper", "scissors"];
 
 let humanScore = 0;
 let computerScore = 0;
+let roundCounter = 0;
 
-const humanChoiceButtons = document.querySelectorAll(".humanChoice");
+const roundAnnouncement = document.querySelector(".round-announcement");
+const scoreboard = document.querySelector(".scoreboard");
+const humanChoiceButtons = document.querySelectorAll(".human-choice");
 humanChoiceButtons.forEach((button) => button.addEventListener("click", playRound));
 
 function playRound(e) {
@@ -11,11 +14,10 @@ function playRound(e) {
   let humanChoice = getHumanChoice(e);
   let humanChoiceLowerCase = humanChoice.toLowerCase();
 
-  console.log(`HUMAN CHOICE IN PLAYROUND: ${humanChoiceLowerCase}`);
-
   if (humanChoiceLowerCase === computerChoice) {
-    console.log(`It is a tie. Human: ${humanScore} Computer: ${computerScore}`);
-    return;
+    roundAnnouncement.innerText = `It is a tie. ${capitalize(humanChoice)} vs ${capitalize(
+      computerChoice
+    )}`;
   }
 
   if (
@@ -24,22 +26,21 @@ function playRound(e) {
     (humanChoiceLowerCase === "scissors" && computerChoice === "paper")
   ) {
     humanScore++;
-    console.log(
-      `The Human won. ${capitalize(humanChoice)} beats ${capitalize(computerChoice)}.`
-    );
+    roundAnnouncement.innerText = `The Human won. ${capitalize(humanChoice)} beats 
+    ${capitalize(computerChoice)}.`;
   } else if (
     (computerChoice === "rock" && humanChoiceLowerCase === "scissors") ||
     (computerChoice === "paper" && humanChoiceLowerCase === "rock") ||
     (computerChoice === "scissors" && humanChoiceLowerCase === "paper")
   ) {
     computerScore++;
-    console.log(
-      `The Computer won. ${capitalize(computerChoice)} beats ${capitalize(humanChoice)}`
-    );
+    roundAnnouncement.innerText = `The Computer won. ${capitalize(
+      computerChoice
+    )} beats ${capitalize(humanChoice)}`;
   }
 
-  console.log(`Human: ${humanScore}`);
-  console.log(`Computer: ${computerScore}`);
+  roundCounter++;
+  scoreboard.innerText = `Human: ${humanScore} Computer: ${computerScore}`;
 }
 
 function announceWinner(humanScore, computerScore) {
@@ -63,12 +64,10 @@ function capitalize(word) {
 
 function getComputerChoice() {
   const randomNumber = Math.floor(Math.random() * 3);
-  console.log(`The Computer chose ${capitalize(choices[randomNumber])}`);
   return choices[randomNumber];
 }
 
 function getHumanChoice(e) {
   let humanChoice = e.target.id;
-  console.log(`The Human chose ${capitalize(humanChoice)}`);
   return humanChoice;
 }
