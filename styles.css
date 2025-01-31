@@ -1,0 +1,18 @@
+*{
+	text-align: center;
+}
+
+.human-choice-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 10%;
+}
+
+.human-choice {
+	width: 150px;
+	height: 150px;
+}
+
+img:hover {
+	transform: scale(1.1);
+}
