@@ -16,3 +16,8 @@
 img:hover {
 	transform: scale(1.1);
 }
+
+.round-announcement  {
+	margin: 8px;
+	line-height: 22px
+}
